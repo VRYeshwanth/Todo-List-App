@@ -1,8 +1,13 @@
 import pool from "../db.js";
 
 export const getTasks = async(req, res) => {
-    const result = await pool.query("SELECT * from tasks ORDER BY id");
-    res.json(result.rows);
+    try {
+        const result = await pool.query("SELECT * from tasks ORDER BY id");
+        res.json(result.rows);
+    }
+    catch(e) {
+        res.status(500).json({error: "Failed to fetch tasks"})
+    }
 }
 
 export const createTask = async(req, res) => {
