@@ -21,3 +21,14 @@ export const createTask = async(req, res) => {
         res.status(500).json({error: "Failed to create task"})
     }
 }
+
+export const deleteTask = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await pool.query("DELETE FROM tasks WHERE id = $1 RETURNING *", [id])
+        res.status(201).json(result.rows);
+    }
+    catch(e) {
+        res.status(500).json({error: "Failed to delete task"})
+    }
+}
