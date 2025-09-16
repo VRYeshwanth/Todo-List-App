@@ -13,7 +13,6 @@ export const getTasks = async(req, res) => {
 export const createTask = async(req, res) => {
     try {
         const title = req.body.title;
-        console.log(title);
         const result = await pool.query("INSERT INTO tasks (title) VALUES ($1) RETURNING *", [title]);
         res.status(201).json(result.rows);
     }

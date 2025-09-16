@@ -1,9 +1,15 @@
+import { useState, useEffect, use } from "react";
+import axios from "axios";
+
 export default function TaskList() {
-    const tasks = [
-        {id: 1, title: "1234567890", completed: false},
-        {id: 2, title: "4561237890", completed: true},
-        {id: 3, title: "9067384512", completed: false}
-    ]
+
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3000/tasks").then(res => setTasks(res.data)).catch(err => console.error(err))
+    }, [])
+
+    
     return (
         <div>
             <ul>
