@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function Form({handleTaskAdded}) {
+export default function Form({tasks, setTasks}) {
 
     const [text, setText] = useState("");
 
@@ -12,7 +12,7 @@ export default function Form({handleTaskAdded}) {
                 completed: false
             })
 
-            handleTaskAdded(response.data);
+            setTasks(prev => [...prev, response.data]);
 
             setText("")
         }

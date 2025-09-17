@@ -14,7 +14,7 @@ export const createTask = async(req, res) => {
     try {
         const title = req.body.title;
         const result = await pool.query("INSERT INTO tasks (title) VALUES ($1) RETURNING *", [title]);
-        res.status(201).json(result.rows);
+        res.status(201).json(result.rows[0]);
     }
     catch(e) {
         res.status(500).json({error: "Failed to create task"})

@@ -1,24 +1,21 @@
 import TaskList from "./TaskList.jsx";
 import Form from "./Form.jsx";
-import { useState } from "react";
+import { useState , useEffect } from "react";
+import axios from "axios";
 
 export default function App() {
 
-    const [refresh, setRefresh] = useState(0);
+    const [tasks, setTasks] = useState([]);
 
-    const handleTaskAdded = () => {
-        setRefresh((prev) => prev + 1)
-    }
-
-    const handleTaskDeleted = () => {
-        setRefresh((prev) => prev + 1)
-    }
+    useEffect(() => {
+        axios.get("http://localhost:3000/tasks").then(res => setTasks(res.data)).catch(err => console.error(err))
+    }, [])
 
     return (
         <div className="container">
             <h1>ToDo App</h1>
-            <Form handleTaskAdded={handleTaskAdded}/>
-            <TaskList refresh={refresh} handleTaskDeleted={handleTaskDeleted}/>
+            <Form tasks={tasks} setTasks={setTasks}/>
+            <TaskList tasks={tasks} setTasks={setTasks}/>
         </div>
     );
 }
