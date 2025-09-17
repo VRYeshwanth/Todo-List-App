@@ -10,11 +10,15 @@ export default function App() {
         setRefresh((prev) => prev + 1)
     }
 
+    const handleTaskDeleted = () => {
+        setRefresh((prev) => prev + 1)
+    }
+
     return (
         <div className="container">
             <h1>ToDo App</h1>
             <Form handleTaskAdded={handleTaskAdded}/>
-            <TaskList refresh={refresh}/>
+            <TaskList refresh={refresh} handleTaskDeleted={handleTaskDeleted}/>
         </div>
     );
 }
