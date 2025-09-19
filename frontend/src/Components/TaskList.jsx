@@ -31,7 +31,7 @@ export default function TaskList({tasks, setTasks}) {
 
     
     return (
-        <div>
+        <div className="taskbox">
             <ul>
                 {tasks.map(task => (
                     task.id === editId ? (
@@ -47,12 +47,14 @@ export default function TaskList({tasks, setTasks}) {
                         </li>
                     ) : (
                         <li key={task.id}>
-                            {task.title}
-                            <button onClick={() => {
-                                setEditId(task.id);
-                                setEditText(task.title);
-                            }}>Edit</button>
-                            <button onClick={() => handleDelete(task.id)}>Delete</button>
+                            <span className="task-title">{task.title}</span>
+                            <div className="buttons">
+                                <button onClick={() => {
+                                    setEditId(task.id);
+                                    setEditText(task.title);
+                                }}><i class='bx bx-edit'></i></button>
+                                <button onClick={() => handleDelete(task.id)}><i class='bx bx-x'></i></button>
+                            </div>
                         </li>
                     )
                 ))}

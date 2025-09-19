@@ -38,4 +38,52 @@
 .form > button {
     font-size: 1.2rem;
     padding: 1rem;
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.taskbox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.taskbox ul {
+    width: 80%;
+}
+
+.taskbox li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.buttons button {
+    padding: 0.8rem;
+    border: 1px solid black;
+    background: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buttons button>i {
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.task-title {
+    font-size: 1.4rem;
 }
