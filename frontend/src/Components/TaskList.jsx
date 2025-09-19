@@ -36,14 +36,16 @@ export default function TaskList({tasks, setTasks}) {
                 {tasks.map(task => (
                     task.id === editId ? (
                         <li key={task.id}>
-                            <input type="text" value={editText} autoFocus onChange={(e) => {
+                            <input type="text" className="edit-input" value={editText} autoFocus onChange={(e) => {
                                 setEditText(e.target.value)
                             }}></input>
-                            <button onClick={() => handleEdit(task.id, task.completed)}>Save</button>
-                            <button onClick={() => {
-                                setEditId(null);
-                                setEditText("");
-                            }}>Cancel</button>
+                            <div className="em-btns">
+                                <button onClick={() => handleEdit(task.id, task.completed)}><i class='bx bx-save'></i></button>
+                                <button onClick={() => {
+                                    setEditId(null);
+                                    setEditText("");
+                                }}><i class='bx bx-x'></i></button>
+                            </div>
                         </li>
                     ) : (
                         <li key={task.id}>
@@ -53,7 +55,7 @@ export default function TaskList({tasks, setTasks}) {
                                     setEditId(task.id);
                                     setEditText(task.title);
                                 }}><i class='bx bx-edit'></i></button>
-                                <button onClick={() => handleDelete(task.id)}><i class='bx bx-x'></i></button>
+                                <button onClick={() => handleDelete(task.id)}><i class='bx bx-trash'></i></button>
                             </div>
                         </li>
                     )

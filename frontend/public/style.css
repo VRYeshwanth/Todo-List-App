@@ -43,6 +43,12 @@
     cursor: pointer;
 }
 
+.form > button > i {
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+}
+
 .taskbox {
     width: 100%;
     display: flex;
@@ -64,13 +70,13 @@
     border: 1px solid black;
 }
 
-.buttons {
+.buttons , .em-btns{
     display: flex;
     justify-content: center;
     gap: 1.2rem;
 }
 
-.buttons button {
+.buttons button , .em-btns button{
     padding: 0.8rem;
     border: 1px solid black;
     background: none;
@@ -78,10 +84,16 @@
     border-radius: 10px;
 }
 
-.buttons button>i {
+.buttons button>i , .em-btns button>i{
     font-size: 2.4rem;
     display: flex;
     align-items: center;
+}
+
+.edit-input {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    width: 70%;
 }
 
 .task-title {

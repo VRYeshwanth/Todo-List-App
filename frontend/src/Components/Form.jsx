@@ -24,7 +24,7 @@ export default function Form({tasks, setTasks}) {
     return (
         <div className="form">
             <input type="text" value={text} placeholder="Enter your task :" onChange={(e) => setText(e.target.value)}/>
-            <button onClick={handleSave}>Save</button>
+            <button onClick={handleSave}><i class='bx bx-plus'></i></button>
         </div>
     )
 }
