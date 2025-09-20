@@ -29,6 +29,17 @@ export default function TaskList({tasks, setTasks}) {
         }
     }
 
+    const handleCheck = async(id, title, completed) => {
+        try {
+            const response = await axios.patch("http://localhost:3000/tasks/" +id, { title: title , completed: !completed });
+
+            setTasks((prev) => prev.map((task) => task.id === id ? response.data : task))
+        }
+        catch (e) {
+            console.log("Error updating task : " +e)
+        }
+    }
+
     
     return (
         <div className="taskbox">
@@ -49,7 +60,10 @@ export default function TaskList({tasks, setTasks}) {
                         </li>
                     ) : (
                         <li key={task.id}>
-                            <span className="task-title">{task.title}</span>
+                            <div className="task-data">
+                                <input type="checkbox" checked={task.completed} onChange={() => handleCheck(task.id, task.title, task.completed)} />
+                                <span className={`task-title ${task.completed ? "checked" : ""}`}>{task.title}</span>
+                            </div>
                             <div className="buttons">
                                 <button onClick={() => {
                                     setEditId(task.id);

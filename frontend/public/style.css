@@ -99,3 +99,18 @@
 .task-title {
     font-size: 1.4rem;
 }
+
+.checked {
+    text-decoration: line-through;
+}
+
+.task-data {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.task-data input {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
