@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TodoPage from "./TodoPage";
-import Register from "./Register";
-import Login from "./Login";
+import AuthForm from "./AuthForm";
 
 export default function AuthPage() {
 
@@ -20,8 +19,8 @@ export default function AuthPage() {
                 )
             }
 
-            {authMode === "register" && <Register />}
-            {authMode === "login" && <Login />}
+            {authMode === "register" && <AuthForm type="register" onSuccess={() => setAuthMode(null)}/>}
+            {authMode === "login" && <AuthForm type="login" />}
         </div>
     )
 }
