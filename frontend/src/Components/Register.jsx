@@ -1,5 +1,7 @@
+import AuthForm from "./AuthForm"
+
 export default function Register() {
     return (
-        <h1>register form</h1>
+        <AuthForm type="register" />
     )
 }

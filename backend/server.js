@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import taskRoutes from "./Routes/TaskRoutes.js"
+import taskRoutes from "./Routes/TaskRoutes.js";
+import authRoutes from "./Routes/AuthRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/tasks", taskRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
