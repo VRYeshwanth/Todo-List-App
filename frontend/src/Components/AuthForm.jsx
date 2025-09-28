@@ -18,11 +18,22 @@ export default function AuthForm(props) {
                     password: password
                 })
                 alert("Registration Successful! You can now login.")
-                props.onSuccess();
+                props.registerSuccess();
+            }
+            if(props.type === "login") {
+                const response = await axios.post("http://localhost:3000/auth/login", {
+                    email: email,
+                    password: password
+                })
+
+                const token = response.data.token;
+                localStorage.setItem("token" , token);
+                alert("Login Successful!")
+                props.loginSuccess();
             }
         }
         catch(e) {
-            const message = e.response?.data?.error || "Something went wrong. Please try again !!";
+            const message = e.response?.data?.error || error;
             setError(message);
         }
     }
