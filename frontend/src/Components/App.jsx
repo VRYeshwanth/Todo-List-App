@@ -1,36 +1,47 @@
 import AuthPage from "./AuthPage";
 import TodoPage from "./TodoPage";
 import { useState , useEffect } from "react";
+import axios from "axios";
 
 export default function App() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [loading, setLoading] = useState(true); // add this line
 
     const verifyToken = async () => {
-        const token = localStorage.getItem("token");
-        if(!token) {
-            return ;
+        if (!token) {
+            setLoading(false);
+            return;
         }
-
         try {
             await axios.post("http://localhost:3000/auth/verify", {}, {
-                headers: {Authorization : `Bearer ${token}`}
+                headers: { Authorization: `Bearer ${token}` }
             });
             setIsLoggedIn(true);
-        }
-        catch(e) {
+        } catch (e) {
             localStorage.removeItem("token");
+            setToken(null);
             setIsLoggedIn(false);
         }
-    }
+        setLoading(false);
+    };
 
-    useEffect(() => { verifyToken(); }, []);
+    useEffect(() => { verifyToken(); }, [token]);
+
+    const handleLogin = (newToken) => {
+        localStorage.setItem("token", newToken);
+        setToken(newToken);
+        setIsLoggedIn(true);
+    }
 
     return (
         <div className="container">
-            {
-                isLoggedIn ? <TodoPage /> : <AuthPage loginSuccess={() => setIsLoggedIn(true)}/>
-            }
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                isLoggedIn ? <TodoPage token={token}/> : <AuthPage loginSuccess={handleLogin}/>
+            )}
         </div>
-    )
+    );
 }

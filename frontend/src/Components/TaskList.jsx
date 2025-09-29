@@ -6,9 +6,15 @@ export default function TaskList({tasks, setTasks}) {
     const [editId, setEditId] = useState(null);
     const [editText, setEditText] = useState("");
 
+    const token = localStorage.getItem("token");
+
     const handleDelete = async (id) => {
         try {
-            await axios.delete("http://localhost:3000/tasks/" +id)
+            await axios.delete("http://localhost:3000/tasks/" +id, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             setTasks(prev => prev.filter(task => task.id !== id));
         }
         catch(e) {
@@ -18,7 +24,11 @@ export default function TaskList({tasks, setTasks}) {
 
     const handleEdit = async (id, completed) => {
         try {
-            const response = await axios.patch("http://localhost:3000/tasks/" +id, { title: editText , completed: completed})
+            const response = await axios.patch("http://localhost:3000/tasks/" +id, { title: editText , completed: completed}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
 
             setTasks((prev) => prev.map((task) => task.id === id ? response.data : task))
             setEditId(null);
@@ -31,7 +41,11 @@ export default function TaskList({tasks, setTasks}) {
 
     const handleCheck = async(id, title, completed) => {
         try {
-            const response = await axios.patch("http://localhost:3000/tasks/" +id, { title: title , completed: !completed });
+            const response = await axios.patch("http://localhost:3000/tasks/" +id, { title: title , completed: !completed }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
 
             setTasks((prev) => prev.map((task) => task.id === id ? response.data : task))
         }

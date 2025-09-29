@@ -6,10 +6,16 @@ export default function Form({tasks, setTasks}) {
     const [text, setText] = useState("");
 
     const handleSave = async() => {
+        const token = localStorage.getItem("token");
+
         try {
             const response = await axios.post("http://localhost:3000/tasks", {
                 title: text,
                 completed: false
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
 
             setTasks(prev => [...prev, response.data]);

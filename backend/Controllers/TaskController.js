@@ -2,7 +2,9 @@ import pool from "../db.js";
 
 export const getTasks = async(req, res) => {
     try {
-        const result = await pool.query("SELECT * from tasks ORDER BY id");
+        const userID = req.user.id;
+
+        const result = await pool.query("SELECT * from tasks WHERE user_id=$1 ORDER BY id", [userID]);
         res.json(result.rows);
     }
     catch(e) {
@@ -13,7 +15,9 @@ export const getTasks = async(req, res) => {
 export const createTask = async(req, res) => {
     try {
         const title = req.body.title;
-        const result = await pool.query("INSERT INTO tasks (title) VALUES ($1) RETURNING *", [title]);
+        const userID = req.user.id;
+
+        const result = await pool.query("INSERT INTO tasks (title, user_id, completed) VALUES ($1, $2, $3) RETURNING *", [title, userID, false]);
         res.status(201).json(result.rows[0]);
     }
     catch(e) {
@@ -26,7 +30,9 @@ export const updateTask = async(req, res) => {
         const id = req.params.id;
         const title = req.body.title;
         const completed = req.body.completed;
-        const result = await pool.query("UPDATE tasks SET title = $1, completed = $2 WHERE id = $3 RETURNING *", [title, completed, id]);
+        const userID = req.user.id;
+
+        const result = await pool.query("UPDATE tasks SET title = $1, completed = $2 WHERE id = $3 AND user_id = $4 RETURNING *", [title, completed, id, userID]);
         res.status(201).json(result.rows[0]);
     }
     catch (e) {
@@ -37,7 +43,9 @@ export const updateTask = async(req, res) => {
 export const deleteTask = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await pool.query("DELETE FROM tasks WHERE id = $1 RETURNING *", [id])
+        const userID = req.user.id;
+
+        const result = await pool.query("DELETE FROM tasks WHERE id = $1 AND user_id = $2 RETURNING *", [id, userID])
         res.status(201).json(result.rows);
     }
     catch(e) {

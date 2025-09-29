@@ -27,9 +27,8 @@ export default function AuthForm(props) {
                 })
 
                 const token = response.data.token;
-                localStorage.setItem("token" , token);
                 alert("Login Successful!")
-                props.loginSuccess();
+                props.loginSuccess(token);
             }
         }
         catch(e) {
