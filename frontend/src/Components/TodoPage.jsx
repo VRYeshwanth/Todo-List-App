@@ -3,7 +3,7 @@ import Form from "./Form.jsx";
 import { useState , useEffect } from "react";
 import axios from "axios";
 
-export default function TodoPage({ token }) {
+export default function TodoPage({ token , onLogOut}) {
 
     const [tasks, setTasks] = useState([]);
 
@@ -18,7 +18,7 @@ export default function TodoPage({ token }) {
     return (
         <div className="todo-container">
             <h1>ToDo App</h1>
-            <button className="logout-btn">Logout</button>
+            <button className="logout-btn" onClick={onLogOut}>Logout</button>
             <Form tasks={tasks} setTasks={setTasks}/>
             <TaskList tasks={tasks} setTasks={setTasks}/>
         </div>

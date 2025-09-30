@@ -35,12 +35,18 @@ export default function App() {
         setIsLoggedIn(true);
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setToken(null);
+        setIsLoggedIn(false);
+    }
+
     return (
         <div className="container">
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                isLoggedIn ? <TodoPage token={token}/> : <AuthPage loginSuccess={handleLogin}/>
+                isLoggedIn ? <TodoPage token={token} onLogOut={handleLogout}/> : <AuthPage loginSuccess={handleLogin}/>
             )}
         </div>
     );
