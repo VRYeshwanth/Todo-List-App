@@ -18,6 +18,7 @@ export default function TodoPage({ token }) {
     return (
         <div className="todo-container">
             <h1>ToDo App</h1>
+            <button className="logout-btn">Logout</button>
             <Form tasks={tasks} setTasks={setTasks}/>
             <TaskList tasks={tasks} setTasks={setTasks}/>
         </div>

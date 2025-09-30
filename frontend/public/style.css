@@ -18,8 +18,24 @@
     gap: 2rem;
 }
 
+.todo-container {
+    position: relative;
+}
+
 .todo-container > h1 , .auth-container > h1{
     font-size: 3rem;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    background: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 1.2rem;
+    cursor: pointer;
 }
 
 .form {
