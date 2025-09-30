@@ -9,6 +9,7 @@ A full-stack Todo List application built with Node.js, Express, and PostgreSQL o
 - ❌ Delete tasks
 - 📌 Mark tasks as completed
 - 📂 Persistent storage with PostgreSQL
+- 🔑 User Authentication
 
 ## 🛠️ Tech Stack
 
@@ -68,3 +69,46 @@ Backend will run on :
 ```
 http://localhost:3000
 ```
+
+# 📷 Screenshots
+
+### Main Page
+![Main Page](./assets/Screenshot-1.png)
+
+### Register Page
+![Register Page](./assets/Screenshot-2.png)
+
+### Register Page with error
+![Register Page with Error](./assets/Screenshot-3.png)
+
+### Login Page
+![Login Page](./assets/Screenshot-4.png)
+
+### Todo Page
+![Todo Page](./assets/Screenshot-5.png)
+
+# 📌 API Endpoints
+
+## Normal Routes
+
+| Method | EndPoint | Description |
+|:--|:--|:--|
+|POST|/auth/register|Register a new user|
+|POST|/auth/login|Login and get a new token|
+
+## Protected Routes (Authentication Required)
+| Method | EndPoint | Description |
+|:--|:--|:--|
+|GET|/tasks|Get all tasks|
+|POST|/tasks|Create a new task|
+|PATCH|/tasks/:id|Updates a task by ID|
+|DELETE|/tasks/:id|Deletes a task by ID|
+
+## Middleware Routes
+| Method | EndPoint | Description |
+|:--|:--|:--|
+|POST|/auth/verify|Verifies token validity|
+
+## Contributing
+Thank you for checking out my ToDo App!  
+Feel free to try it, report issues, or contribute.
